@@ -1,0 +1,1 @@
+(function(){const css='native-ux.css';if(!document.querySelector('link[href$="/'+css+'"]')){const l=document.createElement('link');l.rel='stylesheet';l.href=css;document.head.appendChild(l)}if(!document.querySelector('script[data-wg-native]')){const s=document.createElement('script');s.src='native-ux.js';s.defer=true;s.dataset.wgNative='1';document.head.appendChild(s)}})();
