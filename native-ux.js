@@ -2,11 +2,9 @@
 (function(){
   'use strict';
   const init=()=>{
-    document.documentElement.classList.add('wg-native-ready');
-    const app=document.querySelector('main')||document.body;
-    app.classList.add('wg-native');
+    const app=document.querySelector('main');
+    if(app) app.classList.add('wg-native');
     document.querySelectorAll('input[type="search"],input[placeholder*="Search" i]').forEach(el=>el.classList.add('wg-search'));
-    document.querySelectorAll('select').forEach(el=>el.closest('label,section,div')?.classList.add('wg-filter-panel'));
     document.querySelectorAll('button').forEach(btn=>{
       const t=(btn.textContent||'').trim().toLowerCase();
       if(t.includes('clear')||t.includes('reset')) btn.classList.add('wg-clear');
