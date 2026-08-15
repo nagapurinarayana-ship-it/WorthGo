@@ -1,55 +1,17 @@
-/* WorthGo discovery-first UX refresh.
-   Inspired by common discovery patterns: prominent search, horizontal category rails,
-   compact filter/sort controls, dense result cards and progressive disclosure.
-   No product branding, assets or functionality copied. */
+/* WorthGo discovery-first UX refresh. */
 :root{--wg-ink:#171916;--wg-muted:#73766f;--wg-paper:#f7f4ed;--wg-card:#fff;--wg-line:rgba(38,42,36,.12);--wg-soft:#eeebe3;--wg-accent:#ffbf32;--wg-radius:18px}
 body{background:var(--wg-paper);color:var(--wg-ink)}
 .site-header{position:sticky;top:0;z-index:900;background:rgba(247,244,237,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(38,42,36,.08)}
 main{display:flex;flex-direction:column}
-.hero{order:1;min-height:unset;padding-top:42px;padding-bottom:28px}
-.hero-copy{max-width:760px}
-.hero-text{max-width:680px}
-.mode-switch{margin-top:22px}
-.mode-switch .mode{min-height:72px}
-.finder{order:2}
-.finder .section-intro{margin-bottom:18px}
-.intent-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
-.intent-grid .intent{min-height:132px;padding:18px;border-radius:16px}
-.intent-grid .intent strong{font-size:17px}
-.quick-row{display:flex;align-items:center;gap:8px;overflow-x:auto;padding:13px 0 3px;scrollbar-width:none}
-.quick-row::-webkit-scrollbar{display:none}
-.quick-row>span{flex:0 0 auto;color:var(--wg-muted);font-size:13px;font-weight:600}
-.quick-row button{flex:0 0 auto;border:1px solid var(--wg-line);background:var(--wg-card);border-radius:999px;padding:10px 14px;font:inherit;font-weight:650;white-space:nowrap;cursor:pointer}
-.wg-browse{order:3;margin-top:6px;padding-top:0}
-.wg-browse-head{position:relative;padding-top:6px}
-.wg-browse-head h2{font-size:clamp(30px,5vw,44px)}
-.wg-browse-head p{max-width:620px}
-.wg-searchbar{position:sticky;top:76px;z-index:100;margin-top:12px}
-.wg-chip-row{padding-top:13px;padding-bottom:7px}
-.wg-chip{font-weight:650}
-.wg-filterbar{position:sticky;top:139px;z-index:90;padding:8px 0;background:linear-gradient(var(--wg-paper) 72%,transparent);margin-top:2px}
-.wg-filter-panel{box-shadow:0 8px 24px rgba(38,42,36,.05)}
-.wg-browse-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.wg-browse-card{border-radius:16px;transition:transform .18s ease,box-shadow .18s ease}
-.wg-browse-card:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(38,42,36,.09)}
-.wg-browse-media{aspect-ratio:16/10}
-.wg-browse-body h3{font-size:22px}
-.wg-browse-add{background:#f3efe6}
-/* One authoritative result system: Browse owns the city inventory.
-   The legacy Discover renderer remains in the DOM for compatibility with
-   core state/event code, but is not rendered as a second visible result list. */
-.discover{display:none!important}
-.collections{order:4}
-.collection-row{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
-.collection-row::-webkit-scrollbar{display:none}
-.collection-row>button{flex:0 0 min(270px,76vw);text-align:left}
-.split{order:5}
-.cta{order:6}
-.footer{margin-top:30px}
-/* Compact discovery-card language throughout the site. */
-.place-card,.wg-browse-card,.collection-row>button,.split-panel,.cta{border-color:var(--wg-line)}
-.result-summary{border:1px solid var(--wg-line);border-radius:14px;background:#fff;padding:10px 13px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.result-summary strong{background:var(--wg-accent);border-radius:999px;padding:5px 9px;font-size:12px}
-.result-summary small{color:var(--wg-muted)}
+.hero{order:1;min-height:unset;padding-top:42px;padding-bottom:28px}.hero-copy{max-width:760px}.hero-text{max-width:680px}.mode-switch{margin-top:22px}.mode-switch .mode{min-height:72px}
+.finder{order:2}.finder .section-intro{margin-bottom:18px}.intent-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.intent-grid .intent{min-height:132px;padding:18px;border-radius:16px}.intent-grid .intent strong{font-size:17px}
+.quick-row{display:flex;align-items:center;gap:8px;overflow-x:auto;padding:13px 0 3px;scrollbar-width:none}.quick-row::-webkit-scrollbar{display:none}.quick-row>span{flex:0 0 auto;color:var(--wg-muted);font-size:13px;font-weight:600}.quick-row button{flex:0 0 auto;border:1px solid var(--wg-line);background:var(--wg-card);border-radius:999px;padding:10px 14px;font:inherit;font-weight:650;white-space:nowrap;cursor:pointer}
+.wg-browse{order:3;margin-top:6px;padding-top:0}.wg-browse-head{position:relative;padding-top:6px}.wg-browse-head h2{font-size:clamp(30px,5vw,44px)}.wg-browse-head p{max-width:620px}
+/* Search and filters stay in normal flow. They must never cover the header or results. */
+.wg-searchbar{position:relative;top:auto;z-index:10;margin-top:12px}.wg-chip-row{padding-top:13px;padding-bottom:7px}.wg-chip{font-weight:650}.wg-filterbar{position:relative;top:auto;z-index:10;padding:8px 0;background:linear-gradient(var(--wg-paper) 72%,transparent);margin-top:2px}.wg-filter-panel{box-shadow:0 8px 24px rgba(38,42,36,.05)}
+.wg-browse-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.wg-browse-card{border-radius:16px;transition:transform .18s ease,box-shadow .18s ease}.wg-browse-card:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(38,42,36,.09)}.wg-browse-media{aspect-ratio:16/10}.wg-browse-body h3{font-size:22px}.wg-browse-add{background:#f3efe6}
+/* One authoritative result system: Browse owns the city inventory. */
+.discover{display:none!important}.collections{order:4}.collection-row{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}.collection-row::-webkit-scrollbar{display:none}.collection-row>button{flex:0 0 min(270px,76vw);text-align:left}.split{order:5}.cta{order:6}.footer{margin-top:30px}
+.place-card,.wg-browse-card,.collection-row>button,.split-panel,.cta{border-color:var(--wg-line)}.result-summary{border:1px solid var(--wg-line);border-radius:14px;background:#fff;padding:10px 13px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}.result-summary strong{background:var(--wg-accent);border-radius:999px;padding:5px 9px;font-size:12px}.result-summary small{color:var(--wg-muted)}
 @media(max-width:980px){.intent-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.wg-browse-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:680px){.hero{padding-top:24px}.hero h1{font-size:clamp(42px,13vw,64px)}.intent-grid{display:flex;overflow-x:auto;gap:9px;padding-bottom:4px;scrollbar-width:none}.intent-grid::-webkit-scrollbar{display:none}.intent-grid .intent{flex:0 0 158px;min-height:126px}.quick-row{margin-top:3px}.wg-searchbar{position:sticky;top:70px}.wg-filterbar{position:sticky;top:124px}.wg-browse-head h2{font-size:34px}.wg-browse-grid{grid-template-columns:1fr}.wg-browse-card{border-radius:18px}.wg-browse-media{aspect-ratio:16/9}.mode-switch{gap:8px}.mode-switch .mode{min-height:66px}.collection-row>button{flex-basis:78vw}}
+@media(max-width:680px){.hero{padding-top:24px}.hero h1{font-size:clamp(42px,13vw,64px)}.intent-grid{display:flex;overflow-x:auto;gap:9px;padding-bottom:4px;scrollbar-width:none}.intent-grid::-webkit-scrollbar{display:none}.intent-grid .intent{flex:0 0 158px;min-height:126px}.quick-row{margin-top:3px}.wg-searchbar,.wg-filterbar{position:relative;top:auto}.wg-browse-head h2{font-size:34px}.wg-browse-grid{grid-template-columns:1fr}.wg-browse-card{border-radius:18px}.wg-browse-media{aspect-ratio:16/9}.mode-switch{gap:8px}.mode-switch .mode{min-height:66px}.collection-row>button{flex-basis:78vw}}
