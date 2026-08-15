@@ -1,20 +1,16 @@
-/* WorthGo native UX layer — calm, task-first, mobile-first. */
-:root{--wg-radius:16px;--wg-gap:14px}
-.wg-native{max-width:1180px;margin:auto}
-.wg-native .finder,.wg-native .discover,.wg-native .split,.wg-native .collections,.wg-native .cta{scroll-margin-top:84px}
-.wg-native .finder{padding-top:clamp(28px,5vw,56px)}
-.wg-native .intent-grid{gap:12px}
-.wg-native .intent{min-height:112px;border-radius:var(--wg-radius)}
-.wg-native .quick-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.wg-native .quick-row button{min-height:42px;border-radius:999px;padding:8px 14px}
-.wg-native .wg-search{min-height:52px;border-radius:18px}
-.wg-native .discover .cards{gap:var(--wg-gap)}
-.wg-native .cards>*{border-radius:var(--wg-radius)}
-.wg-native .collection-row{gap:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
-.wg-native .collection-row>*{flex:0 0 min(280px,78vw);border-radius:var(--wg-radius)}
-.wg-native .split{gap:var(--wg-gap)}
-.wg-native .cta{border-radius:20px}
-.wg-native .wg-clear{min-height:42px}
-.wg-native .wg-go{min-height:46px;font-weight:700}
-@media(max-width:700px){.wg-native{padding-inline:12px}.wg-native .intent-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.wg-native .split{grid-template-columns:1fr}.wg-native .quick-row{align-items:stretch}.wg-native .quick-row button{flex:1 1 140px}}
-@media(max-width:420px){.wg-native .intent{min-height:96px}.wg-native .intent small{font-size:.78rem}}
+/* WorthGo native UX — calm, task-first, mobile-first. Targets the real homepage structure. */
+main{max-width:1180px;margin-inline:auto}
+.finder,.discover,.split,.collections,.cta{scroll-margin-top:84px}
+.finder{padding-top:clamp(28px,5vw,56px)}
+.intent-grid{gap:12px}
+.intent{min-height:112px;border-radius:16px}
+.quick-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.quick-row button{min-height:42px;border-radius:999px;padding:8px 14px}
+.discover .cards{gap:14px}
+.discover .cards>*{border-radius:16px}
+.collection-row{gap:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.collection-row>*{flex:0 0 min(280px,78vw);border-radius:16px}
+.split{gap:14px}
+.cta{border-radius:20px}
+@media(max-width:700px){main{padding-inline:12px}.intent-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.split{grid-template-columns:1fr}.quick-row{align-items:stretch}.quick-row button{flex:1 1 140px}}
+@media(max-width:420px){.intent{min-height:96px}.intent small{font-size:.78rem}}
