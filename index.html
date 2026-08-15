@@ -17,11 +17,10 @@
 <header class="site-header">
   <a class="brand" href="#top" aria-label="WorthGo home"><span class="brand-mark">W</span><span>Worth<span>Go</span></span></a>
   <div class="header-actions">
-    <button class="city-pill" type="button" data-city="hyderabad">🇮🇳 Hyderabad <span>⌄</span></button>
+    <button class="city-pill" type="button">🇮🇳 Hyderabad <span>⌄</span></button>
     <button class="menu-btn" type="button" aria-label="Open menu">☰</button>
   </div>
 </header>
-
 <main id="top">
   <section class="hero">
     <div class="hero-copy">
@@ -31,17 +30,13 @@
       <div class="mode-switch" role="tablist" aria-label="How are you using WorthGo?">
         <button class="mode active" data-mode="local" role="tab" aria-selected="true">🏠 <span><strong>I'm a Local</strong><small>Show me the good stuff nearby</small></span></button>
         <button class="mode" data-mode="visitor" role="tab" aria-selected="false">🧳 <span><strong>I'm Visiting</strong><small>Help me make the most of it</small></span></button>
-        <button class="mode" data-mode="explore" role="tab" aria-selected="false">✦ <span><strong>Just Exploring</strong><small>Surprise me</small></span></button>
+        <button class="mode" data-mode="explorer" role="tab" aria-selected="false">✦ <span><strong>Just Exploring</strong><small>Surprise me</small></span></button>
       </div>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      <div class="sun"></div><div class="route route-one"></div><div class="route route-two"></div>
-      <div class="pin pin-one">🍽️</div><div class="pin pin-two">☕</div><div class="pin pin-three">✦</div>
-      <div class="postcard"><span>WORTH</span><strong>GO</strong><small>Hyderabad • Dubai</small></div>
-    </div>
+    <div class="hero-art" aria-hidden="true"><div class="sun"></div><div class="route route-one"></div><div class="route route-two"></div><div class="pin pin-one">🍽️</div><div class="pin pin-two">☕</div><div class="pin pin-three">✦</div><div class="postcard"><span>WORTH</span><strong>GO</strong><small>Hyderabad • Dubai</small></div></div>
   </section>
 
-  <section class="finder shell">
+  <section class="finder shell" id="finder">
     <div class="section-intro"><div><span class="kicker">START HERE</span><h2>What are you in the mood for?</h2></div><span class="context" id="contextLabel">For locals in Hyderabad</span></div>
     <div class="intent-grid">
       <button class="intent featured" data-intent="eat"><span class="intent-icon">🍴</span><strong>Eat</strong><small>Find something delicious</small></button>
@@ -58,13 +53,9 @@
     <div class="quick-row"><span>Or tell us:</span><button data-filter="budget">₹ Budget</button><button data-filter="time">⏱ I have 2 hours</button><button data-filter="nearby">📍 Near me</button></div>
   </section>
 
-  <section class="discover shell">
-    <div class="section-intro"><div><span class="kicker">CURATED FOR YOU</span><h2>Places worth knowing</h2></div><a href="#" class="text-link">See all <span>→</span></a></div>
-    <div class="cards">
-      <article class="place-card card-big"><div class="place-image breakfast-img"><span class="image-label">💎 Local favorite</span><span class="save">♡</span></div><div class="place-body"><div class="place-meta"><span>🥣 Breakfast</span><span>₹</span></div><h3>Old-school tiffin worth waking up for</h3><p>Simple, fast and the kind of breakfast locals keep coming back to.</p><div class="place-footer"><span>📍 Hyderabad</span><span>30–45 min</span></div></div></article>
-      <article class="place-card"><div class="place-image hidden-img"><span class="image-label">✦ Hidden gem</span><span class="save">♡</span></div><div class="place-body"><div class="place-meta"><span>☕ Café</span><span>₹₹</span></div><h3>A quiet corner you'd miss from the main road</h3><p>For slow coffee, good conversation and a break from the usual.</p><div class="place-footer"><span>📍 Jubilee Hills</span><span>1–2 hrs</span></div></div></article>
-      <article class="place-card"><div class="place-image explore-img"><span class="image-label">📍 Worth the trip</span><span class="save">♡</span></div><div class="place-body"><div class="place-meta"><span>🌆 Explore</span><span>₹₹</span></div><h3>See a different side of the city</h3><p>A compact half-day idea mixing a landmark, local food and a little wandering.</p><div class="place-footer"><span>📍 Old City</span><span>3 hrs</span></div></div></article>
-    </div>
+  <section class="discover shell" aria-live="polite">
+    <div class="section-intro"><div><span class="kicker">CURATED FOR YOU</span><h2>Places worth knowing</h2></div><span class="context">Top matches for your choices</span></div>
+    <div class="cards"></div>
   </section>
 
   <section class="split shell">
@@ -72,12 +63,11 @@
     <div class="split-panel visit-panel"><span class="panel-icon">🧳</span><span class="kicker">FOR VISITORS</span><h2>Less planning.<br><em>More living.</em></h2><p>Tell us how long you have, what you like and your budget. We'll help turn it into a day worth remembering.</p><button class="light-btn" data-mode-jump="visitor">Build my day →</button></div>
   </section>
 
-  <section class="collections shell"><div class="section-intro"><div><span class="kicker">DISCOVER BY VIBE</span><h2>Not everything needs a plan.</h2></div></div><div class="collection-row"><button><span>🌙</span><strong>Tonight</strong><small>Good food & good plans</small></button><button><span>💰</span><strong>Under ₹500</strong><small>Maximum fun, sensible spend</small></button><button><span>💎</span><strong>Hidden</strong><small>For curious people</small></button><button><span>❤️</span><strong>Date night</strong><small>Something they'll remember</small></button></div></section>
+  <section class="collections shell"><div class="section-intro"><div><span class="kicker">DISCOVER BY VIBE</span><h2>Not everything needs a plan.</h2></div></div><div class="collection-row"><button data-intent="tonight"><span>🌙</span><strong>Tonight</strong><small>Good food & good plans</small></button><button data-filter="budget"><span>💰</span><strong>Under ₹500</strong><small>Maximum fun, sensible spend</small></button><button data-intent="hidden"><span>💎</span><strong>Hidden</strong><small>For curious people</small></button><button data-intent="date"><span>❤️</span><strong>Date night</strong><small>Something they'll remember</small></button></div></section>
 
   <section class="cta shell"><div><span class="kicker">WHEN YOU DON'T KNOW</span><h2>Give us a little time.<br><em>We'll find the rest.</em></h2><p>“I have ₹500, three hours and two friends. What should we do?”</p></div><button class="primary-btn" data-action="finder">Find my plan <span>→</span></button></section>
 </main>
-
 <footer class="footer"><div class="footer-brand"><span class="brand-mark">W</span><strong>WorthGo</strong><p>Find places worth going to.</p></div><div class="footer-city"><span>Launching with</span><strong>🇮🇳 Hyderabad &nbsp; · &nbsp; 🇦🇪 Dubai</strong></div></footer>
-<script src="app.js"></script>
+<script src="data.js"></script><script src="app.js"></script>
 </body>
 </html>
