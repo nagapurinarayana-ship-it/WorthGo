@@ -1,0 +1,16 @@
+/* WorthGo native UX layer — calm, task-first, mobile-first. */
+:root{--wg-radius:16px;--wg-gap:14px}
+.wg-native{max-width:1180px;margin:auto}
+.wg-native .wg-search{min-height:52px;border-radius:18px}
+.wg-native .wg-quick{display:flex;gap:10px;overflow:auto;padding:6px 2px 12px;scrollbar-width:none}
+.wg-native .wg-quick>*{flex:0 0 auto}
+.wg-native .wg-filter-panel{border-radius:var(--wg-radius);padding:14px}
+.wg-native .wg-filter-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.wg-native .wg-clear{min-height:42px}
+.wg-native .wg-go{min-height:46px;font-weight:700}
+.wg-native .wg-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--wg-gap)}
+.wg-native .wg-card{border-radius:var(--wg-radius);padding:16px;min-height:190px}
+.wg-native .wg-card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+.wg-native .wg-why{line-height:1.5}
+@media(max-width:800px){.wg-native .wg-results{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.wg-native{padding-inline:12px}.wg-native .wg-results{grid-template-columns:1fr}.wg-native .wg-card{min-height:0}.wg-native .wg-filter-actions>*{flex:1 1 140px}}
