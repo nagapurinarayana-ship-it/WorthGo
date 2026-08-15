@@ -16,5 +16,6 @@
   const enhanceCards=()=>document.querySelectorAll('.place-card').forEach(card=>{if(card.querySelector('.add-day'))return;const name=card.querySelector('h3')?.textContent.trim();const body=card.querySelector('.place-body');if(!name||!body)return;const b=document.createElement('button');b.className='add-day';b.type='button';b.textContent=get().includes(name)?'✓ In My Day':'＋ Add to My Day';b.onclick=()=>{add(name);b.textContent='✓ In My Day'};body.appendChild(b);const save=card.querySelector('.save');save?.addEventListener('click',()=>{if(get().includes(name)){set(get().filter(x=>x!==name));toastDay('Removed from My Day');count()}else add(name)},{capture:true})});
   document.addEventListener('click',e=>{if(e.target.closest('.day-pill'))render()});
   new MutationObserver(enhanceCards).observe(document.body,{childList:true,subtree:true});
+  window.WORTHGO_DAY={add:p=>add(typeof p==='string'?p:p?.name),remove,open:render,count};
   count();enhanceCards();
 })();
