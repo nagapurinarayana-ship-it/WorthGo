@@ -1,16 +1,20 @@
 /* WorthGo native UX layer — calm, task-first, mobile-first. */
 :root{--wg-radius:16px;--wg-gap:14px}
 .wg-native{max-width:1180px;margin:auto}
+.wg-native .finder,.wg-native .discover,.wg-native .split,.wg-native .collections,.wg-native .cta{scroll-margin-top:84px}
+.wg-native .finder{padding-top:clamp(28px,5vw,56px)}
+.wg-native .intent-grid{gap:12px}
+.wg-native .intent{min-height:112px;border-radius:var(--wg-radius)}
+.wg-native .quick-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.wg-native .quick-row button{min-height:42px;border-radius:999px;padding:8px 14px}
 .wg-native .wg-search{min-height:52px;border-radius:18px}
-.wg-native .wg-quick{display:flex;gap:10px;overflow:auto;padding:6px 2px 12px;scrollbar-width:none}
-.wg-native .wg-quick>*{flex:0 0 auto}
-.wg-native .wg-filter-panel{border-radius:var(--wg-radius);padding:14px}
-.wg-native .wg-filter-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.wg-native .discover .cards{gap:var(--wg-gap)}
+.wg-native .cards>*{border-radius:var(--wg-radius)}
+.wg-native .collection-row{gap:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.wg-native .collection-row>*{flex:0 0 min(280px,78vw);border-radius:var(--wg-radius)}
+.wg-native .split{gap:var(--wg-gap)}
+.wg-native .cta{border-radius:20px}
 .wg-native .wg-clear{min-height:42px}
 .wg-native .wg-go{min-height:46px;font-weight:700}
-.wg-native .wg-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--wg-gap)}
-.wg-native .wg-card{border-radius:var(--wg-radius);padding:16px;min-height:190px}
-.wg-native .wg-card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
-.wg-native .wg-why{line-height:1.5}
-@media(max-width:800px){.wg-native .wg-results{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:560px){.wg-native{padding-inline:12px}.wg-native .wg-results{grid-template-columns:1fr}.wg-native .wg-card{min-height:0}.wg-native .wg-filter-actions>*{flex:1 1 140px}}
+@media(max-width:700px){.wg-native{padding-inline:12px}.wg-native .intent-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.wg-native .split{grid-template-columns:1fr}.wg-native .quick-row{align-items:stretch}.wg-native .quick-row button{flex:1 1 140px}}
+@media(max-width:420px){.wg-native .intent{min-height:96px}.wg-native .intent small{font-size:.78rem}}
