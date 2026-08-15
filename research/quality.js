@@ -20,19 +20,7 @@
   function band(s){return s>=85?'Verified':s>=70?'Strong research':s>=55?'Researching':'Needs verification'}
   function apply(){
     Object.values(window.WORTHGO_DATA||{}).forEach(list=>list.forEach(p=>{p.researchConfidence=confidence(p);p.researchBand=band(p.researchConfidence)}));
-    document.querySelectorAll('.place-card').forEach(card=>{
-      const title=card.querySelector('h3')?.textContent.trim();
-      const p=Object.values(window.WORTHGO_DATA||{}).flat().find(x=>x.name===title);
-      if(!p)return;
-      let badge=card.querySelector('.confidence-badge');
-      if(!badge){badge=document.createElement('span');badge.className='confidence-badge';card.querySelector('.place-meta')?.appendChild(badge)}
-      badge.textContent=`${p.researchBand} · ${p.researchConfidence}/100`;
-    });
   }
   window.WORTHGO_QUALITY={confidence,band,refresh:apply};
   apply();
-  document.addEventListener('DOMContentLoaded',apply);
-  const observer=new MutationObserver(()=>apply());
-  const host=document.querySelector('.cards');
-  if(host)observer.observe(host,{childList:true,subtree:true});
 })();
