@@ -48,5 +48,6 @@
     const clear=()=>{Object.keys(state).forEach(k=>state[k]='');state.sort='worth';host.querySelector('#wgBrowseSearch').value='';host.querySelectorAll('select').forEach(s=>s.value='');host.querySelectorAll('.wg-chip').forEach((b,i)=>b.classList.toggle('active',i===0));updateActive();build();toast('All browse filters cleared')};host.querySelector('#wgBrowseClear').onclick=clear;host.querySelector('#wgClearFilters').onclick=clear;
     const pill=document.querySelector('.city-pill');host.dataset.city=city();if(pill){const observer=new MutationObserver(()=>{const current=city();if(host.dataset.city!==current){host.dataset.city=current;populate();state.area='';host.querySelector('#wgArea').value='';build()}});observer.observe(pill,{subtree:true,childList:true,characterData:true})}
   };
-  const init=()=>mount();if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+  const loadSiteUx=()=>{if(document.getElementById('worthgoSiteUx'))return;const link=document.createElement('link');link.id='worthgoSiteUx';link.rel='stylesheet';link.href='site-ux.css';document.head.appendChild(link)};
+  const init=()=>{loadSiteUx();mount()};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
