@@ -1,0 +1,16 @@
+/* WorthGo native UX — calm, task-first, mobile-first. Targets the real homepage structure. */
+main{max-width:1180px;margin-inline:auto}
+.finder,.discover,.split,.collections,.cta{scroll-margin-top:84px}
+.finder{padding-top:clamp(28px,5vw,56px)}
+.intent-grid{gap:12px}
+.intent{min-height:112px;border-radius:16px}
+.quick-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.quick-row button{min-height:42px;border-radius:999px;padding:8px 14px}
+.discover .cards{gap:14px}
+.discover .cards>*{border-radius:16px}
+.collection-row{gap:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.collection-row>*{flex:0 0 min(280px,78vw);border-radius:16px}
+.split{gap:14px}
+.cta{border-radius:20px}
+@media(max-width:700px){main{padding-inline:12px}.intent-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.split{grid-template-columns:1fr}.quick-row{align-items:stretch}.quick-row button{flex:1 1 140px}}
+@media(max-width:420px){.intent{min-height:96px}.intent small{font-size:.78rem}}
