@@ -13,7 +13,7 @@
   const saved = () => { try { return JSON.parse(localStorage.getItem(saveKey) || '[]'); } catch { return []; } };
   const isSaved = p => saved().includes(p.name);
   const toast = m => window.toast?.(m) || (() => { const t=document.createElement('div'); t.className='toast show'; t.textContent=m; document.body.appendChild(t); setTimeout(()=>t.remove(),1800); })();
-  const open = p => window.WORTHGO_FEATURES?.openPlace ? window.WORTHGO_FEATURES.openPlace(p) : document.querySelector(`.place-card h3`)?.closest('.place-card')?.click();
+  const open = p => window.WORTHGO_FEATURES?.openPlace ? window.WORTHGO_FEATURES.openPlace(p) : null;
   const all = () => data();
   const state = {q:'', category:'', venue:'', food:'', meal:'', experience:'', budget:'', area:'', sort:'worth'};
   const matches = () => {
@@ -34,7 +34,7 @@
     return rows;
   };
   const card = p => {
-    const r = review(p); const tags = categories(p).slice(0,2); const photo = window.WORTHGO_PHOTO_URL?.(p.name) || '';
+    const r = review(p); const tags = categories(p).slice(0,2); const photo = window.photoUrl?.(p.name) || '';
     return `<article class="wg-browse-card" data-browse-id="${esc(p.id ?? p.name)}"><div class="wg-browse-media">${photo ? `<img src="${photo}" alt="${esc(p.name)}" loading="lazy" decoding="async">` : '<span>WorthGo</span>'}<button class="wg-browse-heart" type="button" aria-label="Save ${esc(p.name)}">${isSaved(p)?'♥':'♡'}</button></div><div class="wg-browse-body"><div class="wg-browse-line"><span>${esc(venue(p) || 'Discovery')}</span><strong>${cfg().symbol}${esc(p.budget?.max ?? '—')}</strong></div><h3>${esc(p.name)}</h3><p>${esc(p.whyGo || 'A WorthGo research pick.')}</p><div class="wg-browse-tags">${tags.map(x=>`<span>${esc(x)}</span>`).join('')}${p.area?`<span>📍 ${esc(p.area)}</span>`:''}</div><div class="wg-browse-proof">${r.rating?`★ ${esc(r.rating)}`:''}${r.reviewCount?` · ${esc(r.reviewCount)} reviews`:''}${p.duration?.min!=null?` · ${esc(p.duration.min)}–${esc(p.duration.max)} min`:''}</div><button class="wg-browse-add" type="button">＋ Add to My Day</button></div></article>`;
   };
   const options = (values, label) => `<option value="">${label}</option>${[...new Set(values.filter(Boolean))].sort().map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('')}`;
@@ -59,26 +59,25 @@
     wire(section); build();
   };
   const wire = host => {
-    const rows=all(), tax=window.WORTHGO_TAXONOMY||{};
-    const freq={}; rows.forEach(p=>categories(p).forEach(x=>freq[x]=(freq[x]||0)+1));
-    const popular=Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,12).map(x=>x[0]);
-    host.querySelector('#wgCategoryChips').innerHTML=['All',...popular].map((x,i)=>`<button type="button" class="wg-chip ${i===0?'active':''}" data-cat="${esc(i===0?'':x)}">${esc(x)}</button>`).join('');
+    const rows=all();
+    host.querySelector('#wgCategoryChips').innerHTML=['All',...Object.entries(rows.flatMap(categories).reduce((m,x)=>(m[x]=(m[x]||0)+1,m),{})).sort((a,b)=>b[1]-a[1]).slice(0,12).map(x=>x[0])].map((x,i)=>`<button type="button" class="wg-chip ${i===0?'active':''}" data-cat="${esc(i===0?'':x)}">${esc(x)}</button>`).join('');
     host.querySelector('#wgVenue').innerHTML=options(rows.map(venue),'Any venue');
     host.querySelector('#wgFood').innerHTML=options(rows.flatMap(categories),'Any food');
     host.querySelector('#wgMeal').innerHTML=options(rows.flatMap(meals),'Any time');
     host.querySelector('#wgExperience').innerHTML=options(rows.flatMap(experiences),'Any experience');
-    host.querySelector('#wgBudget').innerHTML=options(city()==='Dubai'?[20,50,100,250].map(x=>String(x)):['250','500','1000','1500'],'Any budget');
+    host.querySelector('#wgBudget').innerHTML=options(city()==='Dubai'?[20,50,100,250].map(String):['250','500','1000','1500'],'Any budget');
     const controls=[['#wgBrowseSearch','q'],['#wgVenue','venue'],['#wgFood','food'],['#wgMeal','meal'],['#wgExperience','experience'],['#wgBudget','budget'],['#wgArea','area'],['#wgSort','sort']];
-    controls.forEach(([sel,key])=>host.querySelector(sel)?.addEventListener('input',e=>{state[key]=e.target.value; updateActive();build()}));
+    controls.forEach(([sel,key])=>host.querySelector(sel)?.addEventListener('input',e=>{state[key]=e.target.value; updateActive(); build()}));
     host.querySelectorAll('.wg-chip').forEach(b=>b.addEventListener('click',()=>{state.category=b.dataset.cat||'';host.querySelectorAll('.wg-chip').forEach(x=>x.classList.toggle('active',x===b));updateActive();build()}));
     host.querySelector('#wgFilterToggle').onclick=()=>host.querySelector('#wgFilterPanel').classList.toggle('show');
-    const clear=()=>{Object.keys(state).forEach(k=>state[k]='');host.querySelector('#wgBrowseSearch').value='';host.querySelectorAll('select').forEach(s=>s.value='');host.querySelectorAll('.wg-chip').forEach((b,i)=>b.classList.toggle('active',i===0));updateActive();build();toast('All browse filters cleared')};
+    const clear=()=>{Object.keys(state).forEach(k=>state[k]='');state.sort='worth';host.querySelector('#wgBrowseSearch').value='';host.querySelectorAll('select').forEach(s=>s.value='');host.querySelectorAll('.wg-chip').forEach((b,i)=>b.classList.toggle('active',i===0));updateActive();build();toast('All browse filters cleared')};
     host.querySelector('#wgBrowseClear').onclick=clear;host.querySelector('#wgClearFilters').onclick=clear;
-    const updateCity=()=>{const title=host.querySelector('h2');if(title)title.textContent=`All places in ${city()}`;host.querySelector('#wgArea').innerHTML=options(cfg().areas.slice(1),'Any area');wireRefresh();};
-    const wireRefresh=()=>{const r=all();host.querySelector('#wgVenue').innerHTML=options(r.map(venue),'Any venue');host.querySelector('#wgFood').innerHTML=options(r.flatMap(categories),'Any food');host.querySelector('#wgMeal').innerHTML=options(r.flatMap(meals),'Any time');host.querySelector('#wgExperience').innerHTML=options(r.flatMap(experiences),'Any experience');build();};
-    const updateActive=()=>{const n=Object.values(state).filter(Boolean).length;host.querySelector('#wgActiveCount').textContent=n?`${n} filter${n===1?'':'s'} applied`:'No filters';};
-    host._updateCity=updateCity;
-    const observer=new MutationObserver(()=>{const current=city();if(host.dataset.city!==current){host.dataset.city=current;updateCity()}});host.dataset.city=city();observer.observe(document.querySelector('.city-pill'),{subtree:true,childList:true,characterData:true});
+    const updateActive=()=>{const n=Object.entries(state).filter(([k,v])=>k!=='sort'&&v).length;host.querySelector('#wgActiveCount').textContent=n?`${n} filter${n===1?'':'s'} applied`:'No filters';};
+    const refreshCity=()=>{const current=city();host.querySelector('h2').textContent=`All places in ${current}`;host.querySelector('#wgArea').innerHTML=options(cfg().areas.slice(1),'Any area');wire(host);build();};
+    host._refreshCity=refreshCity;
+    host.dataset.city=city();
+    const pill=document.querySelector('.city-pill');
+    if(pill){const observer=new MutationObserver(()=>{const current=city();if(host.dataset.city!==current){host.dataset.city=current;refreshCity()}});observer.observe(pill,{subtree:true,childList:true,characterData:true});}
   };
   const init=()=>mount();
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
