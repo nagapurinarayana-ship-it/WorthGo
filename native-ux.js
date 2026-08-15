@@ -1,15 +1,13 @@
-/* WorthGo native UX: progressive discovery without changing core feature logic. */
+/* WorthGo native UX — explicit hooks only; never infer UI from button text. */
 (function(){
   'use strict';
-  const init=()=>{
-    const app=document.querySelector('main');
-    if(app) app.classList.add('wg-native');
-    document.querySelectorAll('input[type="search"],input[placeholder*="Search" i]').forEach(el=>el.classList.add('wg-search'));
-    document.querySelectorAll('button').forEach(btn=>{
-      const t=(btn.textContent||'').trim().toLowerCase();
-      if(t.includes('clear')||t.includes('reset')) btn.classList.add('wg-clear');
-      if(t.includes('go to matches')||t==='go') btn.classList.add('wg-go');
-    });
-  };
+  function init(){
+    const main=document.querySelector('#top');
+    if(main) main.classList.add('wg-native');
+    document.querySelectorAll('#finder input[type="search"], #finder .search-input, #finder [data-role="search"]').forEach(el=>el.classList.add('wg-search'));
+    document.querySelectorAll('[data-action="clear-filters"], [data-filter-clear]').forEach(el=>el.classList.add('wg-clear'));
+    document.querySelectorAll('[data-action="go-to-matches"], [data-go-matches]').forEach(el=>el.classList.add('wg-go'));
+    document.querySelectorAll('[data-role="quick-choices"], .quick-row').forEach(el=>el.classList.add('wg-quick'));
+  }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true}); else init();
 })();
