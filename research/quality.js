@@ -9,7 +9,7 @@
     let score=0;
     score+=official?25:google?20:15;
     score+=Math.min(20,Math.max(0,(sources.length-1)*5));
-    if(review){const count=review.reviewCount||review.googleReviewCount||0;score+=count>=10000?15:count>=1000?12:count>=100?8:4;}
+    if(review){const count=review.reviewCount??review.googleReviewCount??0;score+=count>=10000?15:count>=1000?12:count>=100?8:4;}
     const verified=p.lastVerified?Math.max(0,Math.floor((Date.now()-new Date(p.lastVerified))/86400000)):365;
     score+=verified<=30?15:verified<=90?12:verified<=180?8:4;
     const complete=['whyGo','whySkip','budget','duration','area','bestFor','classification'].filter(k=>p[k]!==undefined).length;
@@ -30,6 +30,9 @@
     });
   }
   window.WORTHGO_QUALITY={confidence,band,refresh:apply};
+  apply();
+  document.addEventListener('DOMContentLoaded',apply);
   const observer=new MutationObserver(()=>apply());
-  document.addEventListener('DOMContentLoaded',()=>{apply();const host=document.querySelector('.cards');if(host)observer.observe(host,{childList:true,subtree:true});});
+  const host=document.querySelector('.cards');
+  if(host)observer.observe(host,{childList:true,subtree:true});
 })();
