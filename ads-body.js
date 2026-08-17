@@ -17,7 +17,7 @@
     frame.height='90';
     frame.loading='eager';
     frame.style.cssText='display:block;width:728px;max-width:100%;height:90px;margin:8px auto 0;border:0;overflow:hidden';
-    frame.setAttribute('sandbox','allow-scripts allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation');
+    frame.setAttribute('sandbox','allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation');
     frame.setAttribute('referrerpolicy','no-referrer-when-downgrade');
     frame.srcdoc='<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;overflow:hidden;background:transparent}</style></head><body><script>atOptions={key:"fb72b1a08c3d55bfb8e97d02df50e3cc",format:"iframe",height:90,width:728,params:{}};<\/script><script src="https://www.highperformanceformat.com/fb72b1a08c3d55bfb8e97d02df50e3cc/invoke.js"><\/script></body></html>';
     section.append(label,frame);
@@ -36,7 +36,7 @@
     nativeFrame.height='280';
     nativeFrame.loading='lazy';
     nativeFrame.style.cssText='display:block;width:100%;max-width:760px;height:280px;margin:8px auto 0;border:0;overflow:hidden';
-    nativeFrame.setAttribute('sandbox','allow-scripts allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation');
+    nativeFrame.setAttribute('sandbox','allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation');
     nativeFrame.setAttribute('referrerpolicy','no-referrer-when-downgrade');
     nativeFrame.srcdoc='<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;overflow:auto;background:transparent}</style></head><body><script async data-cfasync="false" src="https://pl30857285.effectivecpmnetwork.com/783069879d6d81d952419969a59fc985/invoke.js"><\/script><div id="container-783069879d6d81d952419969a59fc985"></div></body></html>';
     nativeSection.append(nativeLabel,nativeFrame);
