@@ -39,7 +39,6 @@
       addAfter(anchor,banner.section);
     }
 
-    /* Intentionally no Social Bar: it is a viewport-level overlay and would cover the header. */
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
