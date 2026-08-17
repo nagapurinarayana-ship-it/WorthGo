@@ -40,6 +40,25 @@
     nativeFrame.setAttribute('referrerpolicy','no-referrer-when-downgrade');
     nativeFrame.srcdoc='<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;overflow:auto;background:transparent}</style></head><body><script async data-cfasync="false" src="https://pl30857285.effectivecpmnetwork.com/783069879d6d81d952419969a59fc985/invoke.js"><\/script><div id="container-783069879d6d81d952419969a59fc985"></div></body></html>';
     nativeSection.append(nativeLabel,nativeFrame);
+    var extraLabel=document.createElement('span');
+    extraLabel.className='ad-slot-label';
+    extraLabel.textContent='More sponsored offers';
+    var extraFrame=document.createElement('iframe');
+    extraFrame.title='More sponsored offers';
+    extraFrame.width='100%';
+    extraFrame.height='140';
+    extraFrame.loading='lazy';
+    extraFrame.style.cssText='display:block;width:100%;max-width:760px;height:140px;margin:20px auto 0;border:0;overflow:hidden';
+    extraFrame.setAttribute('sandbox','allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation');
+    extraFrame.setAttribute('referrerpolicy','no-referrer-when-downgrade');
+    extraFrame.srcdoc='<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;min-height:120px;overflow:hidden;background:transparent}</style></head><body><script src="https://pl30857288.effectivecpmnetwork.com/12/10/8e/12108ef7df6279e38a91d22f7aade90a.js"><\/script><script src="https://pl30857284.effectivecpmnetwork.com/b8/05/00/b80500102672bd33e34082cbcb589f42.js"><\/script></body></html>';
+    var smartLink=document.createElement('a');
+    smartLink.className='ad-sponsored-link';
+    smartLink.href='https://www.effectivecpmnetwork.com/p6awrcwi?key=c4cd285d80f323e5736a66847eb18739';
+    smartLink.rel='sponsored nofollow noopener';
+    smartLink.target='_blank';
+    smartLink.textContent='Open sponsored offer';
+    nativeSection.append(extraLabel,extraFrame,smartLink);
     section.parentNode.insertBefore(nativeSection,section.nextSibling);
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
