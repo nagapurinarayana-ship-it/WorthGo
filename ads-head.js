@@ -1,8 +1,4 @@
-/* WorthGo monetization safety.
- * Popunder is intentionally disabled because it opens a full-page destination
- * outside the user's requested discovery flow. Native, Banner and the clearly
- * labelled sponsored link remain available through ads-body.js.
- */
+/* WorthGo banner-only monetization. No global, overlay or redirect-capable ad scripts are loaded here. */
 (function () {
   'use strict';
 })();
