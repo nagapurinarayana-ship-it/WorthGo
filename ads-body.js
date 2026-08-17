@@ -38,7 +38,7 @@
     nativeFrame.style.cssText='display:block;width:100%;max-width:760px;height:280px;margin:8px auto 0;border:0;overflow:hidden';
     nativeFrame.setAttribute('sandbox','allow-scripts allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation');
     nativeFrame.setAttribute('referrerpolicy','no-referrer-when-downgrade');
-    nativeFrame.srcdoc='<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;overflow:auto;background:transparent}</style></head><body><script async data-cfasync="false" src="https://pl30857285.effectivecpmnetwork.com/783069879d6d81d952419969a59fc985/invoke.js"><\\/script><div id="container-783069879d6d81d952419969a59fc985"></div></body></html>';
+    nativeFrame.srcdoc='<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;overflow:auto;background:transparent}</style></head><body><script async data-cfasync="false" src="https://pl30857285.effectivecpmnetwork.com/783069879d6d81d952419969a59fc985/invoke.js"><\/script><div id="container-783069879d6d81d952419969a59fc985"></div></body></html>';
     nativeSection.append(nativeLabel,nativeFrame);
     section.parentNode.insertBefore(nativeSection,section.nextSibling);
   }
