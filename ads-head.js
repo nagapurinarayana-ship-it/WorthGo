@@ -1,8 +1,8 @@
-/* WorthGo monetization: provider-supplied popunder, loaded once from <head>. */
-(function(){
-  if(document.querySelector('script[data-worthgo-popunder]')) return;
-  var s=document.createElement('script');
-  s.src='https://pl30857288.effectivecpmnetwork.com/12/10/8e/12108ef7df6279e38a91d22f7aade90a.js';
-  s.dataset.worthgoPopunder='1';
-  document.head.appendChild(s);
+/* WorthGo monetization safety.
+ * Popunder is intentionally disabled because it opens a full-page destination
+ * outside the user's requested discovery flow. Native, Banner and the clearly
+ * labelled sponsored link remain available through ads-body.js.
+ */
+(function () {
+  'use strict';
 })();
