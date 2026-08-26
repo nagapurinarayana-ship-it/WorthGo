@@ -3,7 +3,7 @@
   'use strict';
   function init(){
     var finder=document.querySelector('#finder');
-    if(!finder||document.querySelector('[data-wg-banner-ad]'))return;
+    if(document.querySelector('[data-wg-banner-ad]'))return;
     var section=document.createElement('section');
     section.className='ad-slot ad-banner';
     section.dataset.wgBannerAd='1';
@@ -21,7 +21,8 @@
     frame.setAttribute('referrerpolicy','no-referrer-when-downgrade');
     frame.srcdoc='<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;overflow:hidden;background:transparent}</style></head><body><script>atOptions={key:"fb72b1a08c3d55bfb8e97d02df50e3cc",format:"iframe",height:90,width:728,params:{}};<\/script><script src="https://www.highperformanceformat.com/fb72b1a08c3d55bfb8e97d02df50e3cc/invoke.js"><\/script></body></html>';
     section.append(label,frame);
-    finder.parentNode.insertBefore(section,finder.nextSibling);
+    if(finder&&finder.parentNode)finder.parentNode.insertBefore(section,finder.nextSibling);
+    else (document.querySelector('main')||document.body).appendChild(section);
 
     var nativeSection=document.createElement('section');
     nativeSection.className='ad-slot ad-native';
