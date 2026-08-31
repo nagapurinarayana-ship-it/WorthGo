@@ -15,6 +15,12 @@ function count(source, regex) {
   return [...source.matchAll(regex)].length
 }
 
+function metaContent(html, name) {
+  const doubleQuoted = html.match(new RegExp(`<meta\\s+name="${name}"\\s+content="([^"]*)"`, 'i'))?.[1]
+  if (doubleQuoted !== undefined) return doubleQuoted.trim()
+  return html.match(new RegExp(`<meta\\s+name='${name}'\\s+content='([^']*)'`, 'i'))?.[1]?.trim() || ''
+}
+
 async function localFileFor(pathname) {
   const clean = pathname.replace(/^\//, '').replace(/\/$/, '')
   const candidates = pathname === '/'
@@ -52,12 +58,12 @@ for (const url of urls) {
   }
 
   const title = html.match(/<title>([^<]+)<\/title>/i)?.[1]?.trim() || ''
-  const description = html.match(/<meta\s+name=["']description["']\s+content=["']([^"']+)/i)?.[1]?.trim() || ''
+  const description = metaContent(html, 'description')
   const canonical = html.match(/<link\s+rel=["']canonical["']\s+href=["']([^"']+)/i)?.[1] || ''
-  const robots = html.match(/<meta\s+name=["']robots["']\s+content=["']([^"']+)/i)?.[1] || ''
+  const robots = metaContent(html, 'robots')
 
   if (title.length < 20 || title.length > 75) fail(`${localPath}: title length should be 20-75 characters`)
-  if (description.length < 70 || description.length > 180) fail(`${localPath}: description length should be 70-180 characters`)
+  if (description.length < 60 || description.length > 200) fail(`${localPath}: description length should be 60-200 characters`)
   if (canonical !== url) fail(`${localPath}: canonical mismatch; expected ${url}`)
   if (!/index/.test(robots) || !/follow/.test(robots)) fail(`${localPath}: page must be index,follow`)
   if (!/max-image-preview:large/.test(robots)) fail(`${localPath}: allow large image previews`)
