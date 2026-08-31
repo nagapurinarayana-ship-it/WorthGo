@@ -1,7 +1,53 @@
-/* WorthGo banner-only monetization: one isolated 728x90 placement after the Finder. */
+/* WorthGo sitewide discovery links plus existing isolated ad placements. */
 (function(){
   'use strict';
+
+  function addSearchTopics(){
+    if(document.querySelector('[data-wg-search-topics]'))return;
+    var path=location.pathname;
+    var title='Popular local searches';
+    var intro='Explore practical city guides using the same plain-language questions people use when deciding where to eat and what to do.';
+    var links=[
+      ['/hyderabad/','Hyderabad food & things to do'],
+      ['/hyderabad/best-biryani','best biryani in Hyderabad'],
+      ['/hyderabad/tiffin-centers','best tiffin centres in Hyderabad'],
+      ['/hyderabad/best-breakfast','best breakfast in Hyderabad'],
+      ['/dubai/','Dubai food & things to do'],
+      ['/dubai/cheap-eats','cheap eats in Dubai'],
+      ['/dubai/hidden-gems','hidden gems in Dubai']
+    ];
+    var topics=['restaurants near me','hidden gems','things to do','budget food','date places','family places','local favourites'];
+    if(path.startsWith('/hyderabad')){
+      title='Popular Hyderabad searches';
+      intro='Find Hyderabad food and local discovery guides by dish, time of day, budget and type of outing.';
+      links=[
+        ['/hyderabad/best-biryani','best biryani in Hyderabad'],
+        ['/hyderabad/tiffin-centers','Hyderabad tiffin centres'],
+        ['/hyderabad/best-breakfast','best breakfast in Hyderabad'],
+        ['/hyderabad/','Hyderabad food & things to do']
+      ];
+      topics=['Hyderabad restaurants','Irani chai Hyderabad','Hyderabad cafes','hidden places in Hyderabad','things to do in Hyderabad','places to visit in Hyderabad','budget food Hyderabad','date places Hyderabad','family places Hyderabad','late night food Hyderabad'];
+    }else if(path.startsWith('/dubai')){
+      title='Popular Dubai searches';
+      intro='Explore Dubai by budget, neighbourhood and experience instead of assuming every worthwhile stop is expensive or tourist-heavy.';
+      links=[
+        ['/dubai/cheap-eats','cheap eats in Dubai'],
+        ['/dubai/hidden-gems','hidden gems in Dubai'],
+        ['/dubai/','Dubai food & things to do']
+      ];
+      topics=['affordable restaurants Dubai','budget food Dubai','Dubai street food','cheap breakfast Dubai','things to do in Dubai','places to visit in Dubai','Old Dubai food','Karama restaurants','Deira food','Satwa restaurants'];
+    }
+    var section=document.createElement('section');
+    section.dataset.wgSearchTopics='1';
+    section.setAttribute('aria-labelledby','wg-popular-searches-title');
+    section.style.cssText='max-width:1120px;margin:38px auto;padding:0 20px';
+    section.innerHTML='<div style="background:#fffdf8;border:1px solid #e7e2d8;border-radius:20px;padding:22px"><span style="font-size:12px;font-weight:800;letter-spacing:.1em;color:#d85f2b">SEARCH BY INTENT</span><h2 id="wg-popular-searches-title" style="margin:8px 0 8px">'+title+'</h2><p style="max-width:780px;color:#70746f;line-height:1.7;margin:0 0 14px">'+intro+'</p><nav aria-label="WorthGo popular guide searches" style="display:flex;flex-wrap:wrap;gap:9px;margin-bottom:14px">'+links.map(function(item){return '<a href="'+item[0]+'" style="display:inline-block;padding:8px 12px;border:1px solid #ded5c7;border-radius:999px;color:#6c3f23;text-decoration:none;font-weight:700;font-size:14px">'+item[1]+'</a>';}).join('')+'</nav><div aria-label="Related local discovery topics" style="display:flex;flex-wrap:wrap;gap:7px">'+topics.map(function(topic){return '<span style="padding:6px 9px;background:#f5efe5;border-radius:999px;font-size:13px;color:#595b56">'+topic+'</span>';}).join('')+'</div></div>';
+    var footer=document.querySelector('footer');
+    if(footer&&footer.parentNode)footer.parentNode.insertBefore(section,footer);else document.body.appendChild(section);
+  }
+
   function init(){
+    addSearchTopics();
     var finder=document.querySelector('#finder');
     if(document.querySelector('[data-wg-banner-ad]'))return;
     var section=document.createElement('section');
