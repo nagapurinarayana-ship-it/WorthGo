@@ -1,0 +1,39 @@
+name: SEO and ad integrity
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate crawl files and homepage metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s robots.txt
+          test -s sitemap.xml
+          test -s index.html
+          grep -qi '<title>.*</title>' index.html
+          grep -qi 'name="description"' index.html
+          grep -qi 'rel="canonical"' index.html
+          grep -qi 'name="robots"' index.html
+          grep -qi 'application/ld+json' index.html
+          grep -q 'Sitemap: https://worthgo.pages.dev/sitemap.xml' robots.txt
+          grep -q '<loc>https://worthgo.pages.dev/' sitemap.xml
+      - name: Preserve required ad integrations
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s ads-head.js
+          test -s ads-body.js
+          grep -q 'highperformanceformat.com' ads-body.js
+          grep -q 'effectivecpmnetwork.com' ads-body.js
+          grep -q 'data-wg-banner-ad' ads-body.js
+          grep -q 'data-wg-native-ad' ads-body.js
